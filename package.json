@@ -2,8 +2,14 @@
   "name": "freelance_app",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/api/*": {
+      "target": "https://app-freelance.herokuapp.com"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
+    "concurrently": "^3.5.1",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "nodemon": "^1.15.1",
@@ -18,9 +24,10 @@
     "url-loader": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node index.js",
+    "client": "npm run start ",
+    "server": "node server.js --prefix api-mongo-server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix api-mongo-server && npm run build"
   }
 }
