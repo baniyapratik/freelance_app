@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "client": "npm run start",
     "server": "npm start --prefix api-mongo-server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
