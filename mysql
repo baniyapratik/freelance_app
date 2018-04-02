@@ -1,0 +1,232 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Mar 19, 2018 at 10:22 AM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `Projects`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Bids`
+--
+
+CREATE TABLE `Bids` (
+  `id` int(11) NOT NULL,
+  `projectId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `bid_value` float DEFAULT NULL,
+  `bidDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Bids`
+--
+
+INSERT INTO `Bids` (`id`, `projectId`, `userId`, `bid_value`, `bidDate`) VALUES
+(16, 23, 4, 9992, '2018-03-14 05:13:46'),
+(18, 23, 15, 18, '2018-03-14 05:13:46'),
+(21, 23, 30, 816, '2018-03-14 05:13:46'),
+(23, 25, 30, 200, '2018-03-14 05:13:46'),
+(24, 25, 15, 100, '2018-03-14 05:13:46'),
+(26, 27, 30, 11, '2018-03-16 03:36:51'),
+(27, 28, 30, 66.5, '2018-03-16 03:36:56'),
+(28, 29, 15, 105, '2018-03-19 07:04:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Hired`
+--
+
+CREATE TABLE `Hired` (
+  `id` int(11) NOT NULL,
+  `projectId` int(11) NOT NULL,
+  `hiredId` int(11) NOT NULL,
+  `hiredDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Hired`
+--
+
+INSERT INTO `Hired` (`id`, `projectId`, `hiredId`, `hiredDate`) VALUES
+(1, 27, 30, '2018-03-16 04:32:05'),
+(2, 27, 30, '2018-03-16 04:32:12'),
+(3, 27, 30, '2018-03-16 04:53:50'),
+(4, 27, 30, '2018-03-16 04:59:04'),
+(5, 29, 15, '2018-03-19 07:06:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Projects`
+--
+
+CREATE TABLE `Projects` (
+  `id` int(11) NOT NULL,
+  `Title` varchar(20) DEFAULT NULL,
+  `Description` varchar(120) DEFAULT NULL,
+  `Skills` varchar(100) DEFAULT NULL,
+  `Budget_low` int(11) DEFAULT NULL,
+  `Budget_high` int(11) DEFAULT NULL,
+  `File` mediumblob,
+  `ownerid` int(11) NOT NULL,
+  `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `dateDone` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hiredUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Projects`
+--
+
+INSERT INTO `Projects` (`id`, `Title`, `Description`, `Skills`, `Budget_low`, `Budget_high`, `File`, `ownerid`, `dateCreated`, `status`, `dateDone`, `hiredUser`) VALUES
+(23, 'Cool Project', 'Something exciting', 'none', 10, 10000, NULL, 30, '2018-03-11 21:30:41', 0, '2018-03-16 02:06:04', 0),
+(25, 'Pokemon Go', 'play games', 'pikka', 100, 200, NULL, 30, '2018-03-12 04:59:16', 0, '2018-03-16 02:06:04', 0),
+(27, 'Super Man Project', 'Heroes United', 'skills', 10, 100, NULL, 15, '2018-03-16 02:18:18', 1, '2018-03-16 02:18:18', 0),
+(28, 'Whatever you want', 'yea yea', 'skill', 10, 123, NULL, 15, '2018-03-16 02:25:59', 0, '2018-04-01 07:00:00', 0),
+(29, 'New Project Added', 'This is a new Project', 'Swimming', 10, 200, NULL, 31, '2018-03-19 07:00:14', 1, '2018-03-31 07:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE `Users` (
+  `id` int(11) NOT NULL,
+  `firstName` varchar(20) DEFAULT NULL,
+  `lastName` varchar(20) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `phone` varchar(10) DEFAULT NULL,
+  `About` text,
+  `Skills` varchar(30) DEFAULT NULL,
+  `password` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`id`, `firstName`, `lastName`, `email`, `phone`, `About`, `Skills`, `password`) VALUES
+(3, 'p', 'p', 'p', NULL, NULL, NULL, '$2a$08$frfK25ZIhujek0ZpRcyceenf8EjG9pmJBK93rKBPOUuBh/gGNC9Jy'),
+(4, 'Daniel', 'Malak', 'email', NULL, NULL, NULL, '$2a$08$DU.eaZdx5wZACLWazpCD0.vhbCbh3zeUcCxP7PU4ZULBBSBFUl8B6'),
+(5, 'Daniel', 'Malak', 'newemail', NULL, NULL, NULL, '$2a$08$sRT8DX3fyrnnOjJ4.P2ts.2wFMqyKAMt4YyrYLdX5MKoANDq5rZh.'),
+(6, 'Daniel', 'Malak', 'newemail1', NULL, NULL, NULL, '$2a$08$u2zx0nenbaYZXM5OGokRvOYkBuCq4fKD0lbSLpePt5X0R3jpkFwXu'),
+(7, 'Daniel', 'Malak', 'newemail12', NULL, NULL, NULL, '$2a$08$6/Jr0gI1esl2Zrxobmje0usoRBl4gmI9rxocncZvPeK5qRmZ4ffCm'),
+(8, 'Daniel', 'Malak', 'newemail123', NULL, NULL, NULL, '$2a$08$uoxfL0oIZK0sww7o9nXSQ.d119wqeSsdBmHA42TKwzvHMJGcqYVC2'),
+(9, 'Daniel', 'Malak', 'ne@gmail.com', NULL, NULL, NULL, '$2a$08$jq.K.NaNjSMbT7./nOdG1e8/D9zXfg1gWHTq0eAemt4cauktkT4iK'),
+(10, 'Daniel', 'Malak', 'ne0@gmail.com', NULL, NULL, NULL, '$2a$08$D3dTT0LIOjBSpvBtpN59beVlPdU6DUHS4sivKOh/ZKY6ucW2whXEe'),
+(11, 'Daniel', 'Malak', 'ne01@gmail.com', NULL, NULL, NULL, '$2a$08$0Tvhv27Y5HkoTS1gfCp/r.Ox7D7krlvhUuY4905yzz130G3syglPm'),
+(12, 'Daniel', 'Malak', 'ne02@gmail.com', NULL, NULL, NULL, '$2a$08$wBkwJVP6uHHYvySstEjFpui4nEvGofaG8wE4/dY07PIxafJASRvYi'),
+(13, 'Daniel', 'Malak', 'ne03@gmail.com', NULL, NULL, NULL, '$2a$08$NsEFQykQ/whc8vxtiKDUqOBpJiO7JN./8uPcyJlQRmBPcROpX17Du'),
+(14, 'Daniel', 'Malak', 'ne034@gmail.com', NULL, NULL, NULL, '$2a$08$Q1gIG2LAtGAs.8qVeJNWeuGtxxrLYxYtAA3fbo/VRmGe5//DZPjnu'),
+(15, 'Pratik ', 'Tester', 'prabaniy@cisco.com', '6506692537', 'More about me', 'skills', '$2a$08$gSsG004xVaL.mO0bk8otveLeAeyOwq12v6jeVUrR3heJJryfdr72.'),
+(16, 'Pratik', 'Baniya', 'prabaniy1@cisco.com', NULL, NULL, NULL, '$2a$08$O4lxd7CKNQqMWGkNuBu2ueRtdw7I/odLxMNTMgxt9jAu71nxZMeMi'),
+(17, 'Dollar', 'Bill', 'emaily', NULL, NULL, NULL, '$2a$08$OzPA4.dzW/YSibV18aO8MumvG3N7EuqAjY8RvGGruSRFLNxMurlqa'),
+(18, 'new ', 'user', 'user123', NULL, NULL, NULL, '$2a$08$y0elnDxsBfn9zELnF/5MBubA8.Olb3pYDqpWS3WTksztH4MVUC4ra'),
+(19, 'Pratik', 'asd', 'asd', '650', 'abc', 'asd', '$2a$08$cJUCxhwBa4n8tbndpg0rA.hgh507/hUwms9pxWfRIlQ.49FFmDx/C'),
+(20, '1', '1', '1111', NULL, NULL, NULL, '$2a$08$1.2UBqyMEFtQS5tDr/Kgx.KrejcwTYyk07T0Wa4btgPpS0zkQJ.lO'),
+(21, 'Captain ', 'Planet', 'hero@gmail.com', NULL, NULL, NULL, '$2a$08$8KWNj8HWkhpqw80CQmvmHe52fpnh9cSG98YyRhScTNoy8mQsWCQEa'),
+(22, 'Captain ', 'Planet', 'hero1@gmail.com', NULL, NULL, NULL, '$2a$08$CkIcN1k9bzaX8pmLWipzq.4vp1SpITb7UBqkGwH/GAQrASY/1CJ5K'),
+(23, 'dd', 'baniya', 'email@email.com', NULL, NULL, NULL, '$2a$08$UxMrOGWu6EzLposet7E7T.kG4dsJS/TQkAd6/nSjkiZEgR4CF9oX.'),
+(24, 'Pratik', 'Baniya', 'myemail@email.com', NULL, NULL, NULL, '$2a$08$qKcDv9iWtcF0BFskoezfJ.SSyQ9ao1wnkylKcLl0F9wUKCSN1zR2a'),
+(25, 's1', 's2', 's1@gmail.com', NULL, NULL, NULL, '$2a$08$Ei6kCbEEfbdON6jhRuFLPeBPW3Zw.Xb56arGuHHIDMYSDXZJHmd9C'),
+(26, 'Test1', 'Test2', 'abc@gmail.com', NULL, NULL, NULL, '$2a$08$/QM5awLL/mkbx6/eWlf4fuSoAgIktSpMDyJqbUkLXqLCNfyUsro5C'),
+(27, 'Test2', 'Test3', 'baniyapratik@gmail.com', NULL, NULL, NULL, '$2a$08$hrAH/fwqfh5oQkcrvuu/0OaQaR21WceTVNj1SZr0WngOeTYDOCvSq'),
+(28, 'Test', 'Test', 'test00@gmail.com', NULL, NULL, NULL, '$2a$08$m6Ykfq85Hj5fFpwtRwwoieTwWxcwq1Ryj/kb93JdQRrkwzhEc1nMa'),
+(29, 'Test1', 'TA', 'abc123@gmail.com', NULL, NULL, NULL, '$2a$08$jVXxO7WadpptyaEA6ufEdOXsQREQmZvkfN0X8gtw1iEVddNJhYJXe'),
+(30, 'Daniel', 'Malakiman', 'danmalak@gmail.com', NULL, NULL, NULL, '$2a$08$d4d7O4NyqsXHo89eX7qfTOAK7PAoaBMk8L/jMSSqqRkAgX9r2lAAa'),
+(31, 'Kevin', 'Hart', 'kevin_hart@gmail.com', '6506692537', 'Im a great swimmer.', 'Swimming', '$2a$08$UqRzd2j7JagrdeBKTXofM.Hno2HT3PamDE37v1ekRDqnGgTA1A0s6');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Bids`
+--
+ALTER TABLE `Bids`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bids_ibfk_1` (`projectId`),
+  ADD KEY `bids_ibfk_2` (`userId`);
+
+--
+-- Indexes for table `Hired`
+--
+ALTER TABLE `Hired`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hiredId` (`hiredId`),
+  ADD KEY `projectId` (`projectId`);
+
+--
+-- Indexes for table `Projects`
+--
+ALTER TABLE `Projects`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `projects_ibfk_1` (`ownerid`);
+
+--
+-- Indexes for table `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Bids`
+--
+ALTER TABLE `Bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `Hired`
+--
+ALTER TABLE `Hired`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `Projects`
+--
+ALTER TABLE `Projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Bids`
+--
+ALTER TABLE `Bids`
+  ADD CONSTRAINT `bids_ibfk_1` FOREIGN KEY (`projectId`) REFERENCES `Projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bids_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Hired`
+--
+ALTER TABLE `Hired`
+  ADD CONSTRAINT `hired_ibfk_1` FOREIGN KEY (`hiredId`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hired_ibfk_2` FOREIGN KEY (`projectId`) REFERENCES `Projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Projects`
+--
+ALTER TABLE `Projects`
+  ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`ownerid`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
