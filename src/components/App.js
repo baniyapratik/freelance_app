@@ -11,7 +11,7 @@ import Dashboard from './Dashboard';
 import NewProject from './Project/newProject';
 import OpenProjects from './OpenProjects';
 import UserProfile from './Profile/switchProfile';
-
+//this function checks for user authentication
 function isLoggedIn() {
   if (localStorage.getItem('isLoggedIn') == 'true') {
     return true;
