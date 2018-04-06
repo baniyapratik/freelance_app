@@ -23,19 +23,11 @@ const PrivateRoute = ({ component: Component, ...rest }) =>
   <Route
     {...rest}
     render={props =>
-      isLoggedIn == true ? <Component {...props} /> : <Redirect to="/login" />}
+      isLoggedIn() == true
+        ? <Component {...props} />
+        : <Redirect to="/login" />}
   />;
 
-function requireAuth(nextState, replace) {
-  console.log('Imgere');
-  console.log(isLoggedIn());
-
-  if (!isLoggedIn()) {
-    replace({
-      pathname: '/login'
-    });
-  }
-}
 class App extends Component {
   render() {
     return (
