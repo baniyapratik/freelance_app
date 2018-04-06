@@ -25,15 +25,15 @@ module.exports = app => {
       res.send(400, err);
     }
   });
-  app.get('/api/getProjects', async (req, res) => {
+  app.get('/api/getProjects', (req, res) => {
     var sum = 0;
     var avg = 0;
-    const newobj = [];
-    const projects = await Project.find({})
+    var newobj = [];
+    const projects = Project.find({})
       .populate('ownerid')
       .exec(function(err, project) {
         project.forEach(function(proj) {
-          let newobj2 = proj;
+          newobj = JSON.parse(JSON.stringify(proj));
           if (proj._id) {
             const bids = Bid.count({ projectId: proj._id }, function(
               err,
@@ -51,16 +51,18 @@ module.exports = app => {
               }
 
               proj['count'] = result.length;
+              newobj['count'] = result.length;
               proj.average = avg;
-              newobj2['average'] = avg;
-              newobj.push(proj);
+
+              newobj['average'] = avg;
+              console.log('Before');
+              console.log(newobj);
               sum = 0;
               avg = 0;
             });
           }
         });
 
-        //console.log(project);
         res.status(200).send(project);
       });
   });

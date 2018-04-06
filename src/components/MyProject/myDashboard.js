@@ -25,7 +25,7 @@ class MyDashboard extends Component {
   }
   renderProjects() {
     const newArray = _.values(this.props.projects);
-
+    console.log(this.props.projects);
     return _.filter(newArray, project => {
       return project.ownerid._id === this.props.userid;
     }).map(project => {
@@ -33,7 +33,7 @@ class MyDashboard extends Component {
         <li className="list-group-item" key={project._id}>
           <div className="card">
             <div className="card-block">
-              {project.ownerid._id === this.props.userid
+              {project.ownerid._id || project.ownerid === this.props.userid
                 ? <button
                     type="button"
                     className="close"

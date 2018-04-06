@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProjectDetail, hireUser } from '../../actions';
+import { fetchProjects, getProjectDetail, hireUser } from '../../actions';
 import Moment from 'moment';
 
 class ProjectDetail extends Component {
@@ -28,6 +28,13 @@ class ProjectDetail extends Component {
       });
     });
   }
+
+  onButtonCancel() {
+    this.props.fetchProjects().then(() => {
+      this.props.onCancel();
+    });
+  }
+
   renderProjects() {
     let counter = 0;
     console.log(this.props.projects);
@@ -110,7 +117,10 @@ class ProjectDetail extends Component {
             ? this.renderError()
             : this.renderProjects()}
         </ul>
-        <button className="btn btn-warning" onClick={this.props.onCancel}>
+        <button
+          className="btn btn-warning"
+          onClick={this.onButtonCancel.bind(this)}
+        >
           Back
         </button>
       </div>
@@ -121,6 +131,8 @@ function mapStateToProps({ projects }) {
   console.log(projects);
   return { projects };
 }
-export default connect(mapStateToProps, { getProjectDetail, hireUser })(
-  withRouter(ProjectDetail)
-);
+export default connect(mapStateToProps, {
+  fetchProjects,
+  getProjectDetail,
+  hireUser
+})(withRouter(ProjectDetail));

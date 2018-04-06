@@ -2,6 +2,11 @@
   "name": "freelance_app",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/api/*": {
+      "target": "http://localhost:5001"
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.5",
